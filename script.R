@@ -31,3 +31,16 @@ LFS.PUF.December.2023 <- LFS.PUF.December.2023 %>%
            ifelse(PUFC09_WORK==1,"working","not working" ))
 
 #check for values
+xtabs(workindicator~education, data=LFS.PUF.December.2023)
+crosstabs = table(LFS.PUF.December.2023$workindicator, LFS.PUF.December.2023$education)
+proportions = prop.table(crosstabs)
+barplot(proportions)
+
+prop_df <- LFS.PUF.December.2023 %>%
+  group_by(education, workindicator) %>%
+  summarise(n=n()) %>%
+  mutate(prop=n/sum(n))
+
+ggplot(prop_df, aes(x=education, y=prop, fill=workindicator))+
+  geom_bar(stat="identity",position = "dodge")+
+  theme_minimal()
