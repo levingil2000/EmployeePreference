@@ -29,3 +29,5 @@ table(LFS.PUF.December.2023$education)
 LFS.PUF.December.2023 <- LFS.PUF.December.2023 %>%
   mutate(workindicator = 
            ifelse(PUFC09_WORK==1,"working","not working" ))
+
+#check for values
